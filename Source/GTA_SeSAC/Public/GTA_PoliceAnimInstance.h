@@ -35,19 +35,21 @@ public:
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
-		class UAnimMontage* PunchJap;
+	class UAnimMontage* PunchJap;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
-		class UAnimMontage* PunchStraight;
+	class UAnimMontage* PunchStraight;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
-		class UAnimMontage* EnteringCar;
+	class UAnimMontage* EnteringCar;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
-		class UAnimMontage* ExitingCar;
+	class UAnimMontage* ExitingCar;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
-		class UAnimMontage* DrivingCar;
+	class UAnimMontage* DrivingCar;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
-		class UAnimMontage* PistolReload;
+	class UAnimMontage* PistolReload;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
-		class UAnimMontage* Damaged;
+	class UAnimMontage* DamagedJap;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
+	class UAnimMontage* DamagedStraight;
 
 
 	UFUNCTION()
@@ -59,5 +61,5 @@ public:
 	UFUNCTION()
 	void AnimNotify_StraightEnd();
 	UFUNCTION()
-	void AnimNotify_DamagedStraightEnd();
+	void AnimNotify_FistDamaged();
 };

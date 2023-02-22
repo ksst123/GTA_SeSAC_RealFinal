@@ -84,6 +84,18 @@ void UGTA_PoliceFightComponent::DoFire()
 {
 }
 
+void UGTA_PoliceFightComponent::OnDamagedJap(int32 damage)
+{
+	ownerPolice->PlayAnimMontage(ownerPolice->BPAnim->DamagedJap, 1.5f, (FName)TEXT("Default"));
+	ownerPolice->CurrentHP -= damage;
+}
+
+void UGTA_PoliceFightComponent::OnDamagedStraight(int32 damage)
+{
+	ownerPolice->PlayAnimMontage(ownerPolice->BPAnim->DamagedStraight, 1.7f, (FName)TEXT("Default"));
+	ownerPolice->CurrentHP -= damage;
+}
+
 void UGTA_PoliceFightComponent::OnActionReload()
 {
 	if (!bHasGun)

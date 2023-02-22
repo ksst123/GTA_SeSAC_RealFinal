@@ -42,6 +42,6 @@ void UGTA_PoliceAnimInstance::AnimNotify_StraightEnd()
 	ownerPolice->LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-void UGTA_PoliceAnimInstance::AnimNotify_DamagedStraightEnd()
+void UGTA_PoliceAnimInstance::AnimNotify_FistDamaged()
 {
 }

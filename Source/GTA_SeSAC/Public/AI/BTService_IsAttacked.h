@@ -13,5 +13,10 @@ UCLASS()
 class GTA_SESAC_API UBTService_IsAttacked : public UBTService_BlackboardBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	UBTService_IsAttacked();
+
+protected:
+	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 };

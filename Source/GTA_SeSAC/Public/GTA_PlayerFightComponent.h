@@ -44,6 +44,10 @@ public:
 	class UInputAction* InputReload;
 
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Character Settings")
+	int32 FistDamage = 5;
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 CurrentPistolAmmo;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -82,6 +86,8 @@ public:
 	bool bIsStraight;
 	UPROPERTY()
 	bool bIsDead;
+	UPROPERTY()
+	bool bDoOnce = false;
 
 
 	// ===========================================================================
@@ -98,6 +104,10 @@ public:
 	void DoFire();
 
 
+	void OnDamagedJap(int32 damage);
+	void OnDamagedStraight(int32 damage);
+
+
 	void OnActionReload();
 
 
@@ -105,6 +115,12 @@ public:
 	void OnActionHand();
 	UFUNCTION(BlueprintCallable)
 	void OnActionPistol();
+
+
+	UFUNCTION()
+	void OnFistBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UFUNCTION()
+	void OnFistEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 
 	UFUNCTION(BlueprintImplementableEvent)

@@ -11,7 +11,13 @@
 #include "Pistol.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/SphereComponent.h"
-#include "Enemy.h"
+#include "GTA_CitizenCharacter.h"
+#include "GTA_PoliceCharacter.h"
+#include "AIController.h"
+#include "GTA_PoliceAnimInstance.h"
+#include "GTA_PoliceFightComponent.h"
+#include "GTA_CitizenAnimInstance.h"
+#include "GTA_CitizenFightComponent.h"
 
 // Sets default values for this component's properties
 UGTA_PlayerFightComponent::UGTA_PlayerFightComponent()
@@ -28,6 +34,12 @@ UGTA_PlayerFightComponent::UGTA_PlayerFightComponent()
 void UGTA_PlayerFightComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+
+	ownerPlayer->RightFistCollision->OnComponentBeginOverlap.AddDynamic(this, &UGTA_PlayerFightComponent::OnFistBeginOverlap);
+	ownerPlayer->RightFistCollision->OnComponentEndOverlap.AddDynamic(this, &UGTA_PlayerFightComponent::OnFistEndOverlap);
+	ownerPlayer->LeftFistCollision->OnComponentBeginOverlap.AddDynamic(this, &UGTA_PlayerFightComponent::OnFistBeginOverlap);
+	ownerPlayer->LeftFistCollision->OnComponentEndOverlap.AddDynamic(this, &UGTA_PlayerFightComponent::OnFistEndOverlap);
 
 	
 	CurrentPistolAmmo = MaxPistolAmmo;
@@ -219,6 +231,18 @@ void UGTA_PlayerFightComponent::DoFire()
 {
 }
 
+void UGTA_PlayerFightComponent::OnDamagedJap(int32 damage)
+{
+	ownerPlayer->PlayAnimMontage(ownerPlayer->BPAnim->DamagedJap, 1.5f, (FName)TEXT("Default"));
+	ownerPlayer->CurrentHP -= damage;
+}
+
+void UGTA_PlayerFightComponent::OnDamagedStraight(int32 damage)
+{
+	ownerPlayer->PlayAnimMontage(ownerPlayer->BPAnim->DamagedStraight, 1.7f, (FName)TEXT("Default"));
+	ownerPlayer->CurrentHP -= damage;
+}
+
 void UGTA_PlayerFightComponent::OnActionReload()
 {
 	if (!bHasGun)
@@ -271,5 +295,105 @@ void UGTA_PlayerFightComponent::OnActionPistol()
 	}
 	ownerPlayer->BPAnim->bHasGun = true;
 	bHasGun = ownerPlayer->BPAnim->bHasGun;
+}
+
+void UGTA_PlayerFightComponent::OnFistBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	AGTA_PoliceCharacter* police = Cast<AGTA_PoliceCharacter>(OtherActor);
+	AGTA_CitizenCharacter* citizen = Cast<AGTA_CitizenCharacter>(OtherActor);
+
+	if (bDoOnce)
+	{
+		return;
+	}
+	bDoOnce = true;
+
+
+	if(police != nullptr)
+	{
+		AAIController* ownerAI = Cast<AAIController>(police->GetController());
+		police->FightComponent->bIsAttacked = true;
+
+		if (bIsJap)
+		{
+			
+			police->BPAnim->AnimNotify_FistDamaged();
+
+			if (police->CurrentHP > 0)
+			{
+				police->FightComponent->OnDamagedJap(FistDamage);
+			}
+			else
+			{
+				police->GetMesh()->SetSimulatePhysics(true);
+				police->FightComponent->bIsDead = true;
+			}
+
+		}
+		else
+		{
+			police->BPAnim->AnimNotify_FistDamaged();
+
+			if (police->CurrentHP > 0)
+			{
+				police->FightComponent->OnDamagedStraight(FistDamage);
+			}
+			else
+			{
+				police->GetMesh()->SetSimulatePhysics(true);
+				police->FightComponent->bIsDead = true;
+			}
+		}
+	}
+	else if(citizen != nullptr)
+	{
+		AAIController* ownerAI = Cast<AAIController>(citizen->GetController());
+		citizen->FightComponent->bIsAttacked = true;
+
+		if (bIsJap)
+		{
+			
+			citizen->BPAnim->AnimNotify_FistDamaged();
+
+			if (citizen->CurrentHP > 0)
+			{
+				citizen->FightComponent->OnDamagedJap(FistDamage);
+			}
+			else
+			{
+				citizen->GetMesh()->SetSimulatePhysics(true);
+				citizen->FightComponent->bIsDead = true;
+			}
+
+		}
+		else
+		{
+			citizen->BPAnim->AnimNotify_FistDamaged();
+
+			if (citizen->CurrentHP > 0)
+			{
+				citizen->FightComponent->OnDamagedStraight(FistDamage);
+			}
+			else
+			{
+				citizen->GetMesh()->SetSimulatePhysics(true);
+				citizen->FightComponent->bIsDead = true;
+			}
+		}
+	}
+
+
+
+
+	
+}
+
+void UGTA_PlayerFightComponent::OnFistEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	bIsJap = false;
+	bIsStraight = false;
+	bDoOnce = false;
 }
 

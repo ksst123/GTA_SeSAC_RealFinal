@@ -26,6 +26,9 @@ void AGTA_CitizenCharacter::BeginPlay()
 	Super::BeginPlay();
 
 
+	CurrentHP = MaxHP;
+
+
 	// 애니메이션 블루프린트
 	BPAnim = Cast<UGTA_CitizenAnimInstance>(GetMesh()->GetAnimInstance());
 }

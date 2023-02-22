@@ -84,6 +84,18 @@ void UGTA_CitizenFightComponent::DoFire()
 {
 }
 
+void UGTA_CitizenFightComponent::OnDamagedJap(int32 damage)
+{
+	ownerCitizen->PlayAnimMontage(ownerCitizen->BPAnim->DamagedJap, 1.5f, (FName)TEXT("Default"));
+	ownerCitizen->CurrentHP -= damage;
+}
+
+void UGTA_CitizenFightComponent::OnDamagedStraight(int32 damage)
+{
+	ownerCitizen->PlayAnimMontage(ownerCitizen->BPAnim->DamagedStraight, 1.7f, (FName)TEXT("Default"));
+	ownerCitizen->CurrentHP -= damage;
+}
+
 void UGTA_CitizenFightComponent::OnActionReload()
 {
 	if (!bHasGun)

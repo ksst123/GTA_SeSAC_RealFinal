@@ -48,7 +48,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
 	class UAnimMontage* PistolReload;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
-	class UAnimMontage* Damaged;
+	class UAnimMontage* DamagedJap;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim Montages")
+	class UAnimMontage* DamagedStraight;
 
 
 	UFUNCTION()
@@ -60,5 +62,5 @@ public:
 	UFUNCTION()
 	void AnimNotify_StraightEnd();
 	UFUNCTION()
-	void AnimNotify_DamagedStraightEnd();
+	void AnimNotify_FistDamaged();
 };

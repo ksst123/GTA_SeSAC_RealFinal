@@ -24,21 +24,25 @@ void UGTA_PlayerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 void UGTA_PlayerAnimInstance::AnimNotify_Jap()
 {
 	ownerPlayer->LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	UE_LOG(LogTemp, Warning, TEXT("Jap On"));
 }
 
 void UGTA_PlayerAnimInstance::AnimNotify_Straight()
 {
 	ownerPlayer->RightFistCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	UE_LOG(LogTemp, Warning, TEXT("Straight On"));
 }
 
 void UGTA_PlayerAnimInstance::AnimNotify_JapEnd()
 {
 	ownerPlayer->LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	UE_LOG(LogTemp, Warning, TEXT("Jap Off"));
 }
 
 void UGTA_PlayerAnimInstance::AnimNotify_StraightEnd()
 {
 	ownerPlayer->LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	UE_LOG(LogTemp, Warning, TEXT("Straight Off"));
 }
 
 void UGTA_PlayerAnimInstance::AnimNotify_DamagedStraightEnd()

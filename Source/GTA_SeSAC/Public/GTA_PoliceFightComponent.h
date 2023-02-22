@@ -25,6 +25,10 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Character Settings")
+	int32 FistDamage = 5;
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 CurrentPistolAmmo;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -52,11 +56,15 @@ public:
 	UPROPERTY()
 	bool bHasGun;
 	UPROPERTY()
+	bool bIsAttacked;
+	UPROPERTY()
 	bool bIsJap;
 	UPROPERTY()
 	bool bIsStraight;
 	UPROPERTY()
 	bool bIsDead;
+	UPROPERTY()
+	bool bDoOnce = false;
 
 
 	// ===========================================================================
@@ -71,6 +79,10 @@ public:
 	void OnActionStraight();
 	void OnActionShoot();
 	void DoFire();
+
+
+	void OnDamagedJap(int32 damage);
+	void OnDamagedStraight(int32 damage);
 
 
 	void OnActionReload();

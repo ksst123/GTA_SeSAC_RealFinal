@@ -42,6 +42,6 @@ void UGTA_CitizenAnimInstance::AnimNotify_StraightEnd()
 	ownerCitizen->LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-void UGTA_CitizenAnimInstance::AnimNotify_DamagedStraightEnd()
+void UGTA_CitizenAnimInstance::AnimNotify_FistDamaged()
 {
 }
