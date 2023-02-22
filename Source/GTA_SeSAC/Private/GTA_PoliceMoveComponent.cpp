@@ -20,8 +20,10 @@ void UGTA_PoliceMoveComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	if(ownerPolice != nullptr)
+	{
+		ownerPolice->GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	}
 }
 
 

@@ -33,6 +33,12 @@ public:
 	class USphereComponent* LeftFistCollision;
 
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UGTA_PoliceMoveComponent* MoveComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UGTA_PoliceFightComponent* FightComponent;
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Police Settings")
 	int32 CurrentHP;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Police Settings")

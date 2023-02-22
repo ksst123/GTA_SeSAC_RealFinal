@@ -2,6 +2,8 @@
 
 
 #include "GTA_PoliceCharacter.h"
+#include "GTA_PoliceMoveComponent.h"
+#include "GTA_PoliceFightComponent.h"
 #include "Components/SphereComponent.h"
 #include "GTA_PoliceAnimInstance.h"
 
@@ -13,6 +15,10 @@ AGTA_PoliceCharacter::AGTA_PoliceCharacter()
 	LeftFistCollision = CreateDefaultSubobject<USphereComponent>(TEXT("Left Fist Collision"));
 	LeftFistCollision->SetupAttachment(GetMesh(), TEXT("hand_lFistSocket"));
 	LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+
+	MoveComponent = CreateDefaultSubobject<UGTA_PoliceMoveComponent>(TEXT("Move Component"));
+	FightComponent = CreateDefaultSubobject<UGTA_PoliceFightComponent>(TEXT("Fight Component"));
 }
 
 void AGTA_PoliceCharacter::BeginPlay()

@@ -31,7 +31,8 @@ void UGTA_CitizenMoveComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+
+	ownerCitizen->GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 }
 
 void UGTA_CitizenMoveComponent::OnActionJump()
