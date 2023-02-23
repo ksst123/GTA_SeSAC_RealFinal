@@ -6,6 +6,8 @@
 #include "GTA_CitizenCharacter.h"
 #include "GTA_PoliceCharacter.h"
 #include "AIController.h"
+#include "GTA_CitizenFightComponent.h"
+#include "GTA_PoliceFightComponent.h"
 
 UBTService_IsAttacked::UBTService_IsAttacked()
 {
@@ -20,10 +22,13 @@ void UBTService_IsAttacked::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* N
 	AGTA_PoliceCharacter* police = Cast<AGTA_PoliceCharacter>(OwnerComp.GetAIOwner()->GetPawn());
 
 
-	/*if (citizen == nullptr)
+	if (citizen != nullptr)
 	{
-		return;
-	}*/
+		OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), citizen->FightComponent->bIsAttacked);
+	}
+	else if(police != nullptr)
+	{
+		OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), police->FightComponent->bIsAttacked);
+	}
 
-	// OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), enemy->bIsDead);
 }

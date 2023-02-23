@@ -13,5 +13,11 @@ UCLASS()
 class GTA_SESAC_API UBTTask_RunAway : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
-	
+
+
+public:
+	UBTTask_RunAway();
+
+protected:
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };

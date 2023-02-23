@@ -42,7 +42,10 @@ void UGTA_PoliceFightComponent::OnActionAimPressed()
 	if (ownerPolice->BPAnim != nullptr)
 	{
 		ownerPolice->BPAnim->bIsFighting = true;
-		ownerPolice->GetCharacterMovement()->bOrientRotationToMovement = true;
+		if (bHasGun)
+		{
+			ownerPolice->GetCharacterMovement()->bOrientRotationToMovement = false;
+		}
 	}
 }
 
@@ -51,8 +54,10 @@ void UGTA_PoliceFightComponent::OnActionAimReleased()
 	if (ownerPolice->BPAnim != nullptr)
 	{
 		ownerPolice->BPAnim->bIsFighting = false;
-		ownerPolice->GetCharacterMovement()->bOrientRotationToMovement = false;
-		ownerPolice->BPAnim->AnimNotify_Jap();
+		if (bHasGun)
+		{
+			ownerPolice->GetCharacterMovement()->bOrientRotationToMovement = true;
+		}
 	}
 }
 

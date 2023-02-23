@@ -26,6 +26,9 @@ void AGTA_CitizenCharacter::BeginPlay()
 	Super::BeginPlay();
 
 
+	RunAwayValue = FMath::RandRange(1, 2);
+
+
 	CurrentHP = MaxHP;
 
 

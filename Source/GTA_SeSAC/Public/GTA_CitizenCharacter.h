@@ -45,6 +45,9 @@ public:
 	int32 MaxHP = 15;
 
 
+	int32 RunAwayValue;
+
+
 	UPROPERTY()
 	class UGTA_CitizenAnimInstance* BPAnim;
 };
