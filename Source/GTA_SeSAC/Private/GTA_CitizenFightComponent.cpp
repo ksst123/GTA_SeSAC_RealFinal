@@ -42,7 +42,10 @@ void UGTA_CitizenFightComponent::OnActionAimPressed()
 	if (ownerCitizen->BPAnim != nullptr)
 	{
 		ownerCitizen->BPAnim->bIsFighting = true;
-		ownerCitizen->GetCharacterMovement()->bOrientRotationToMovement = true;
+		if (bHasGun)
+		{
+			ownerCitizen->GetCharacterMovement()->bOrientRotationToMovement = false;
+		}
 	}
 }
 
@@ -51,7 +54,10 @@ void UGTA_CitizenFightComponent::OnActionAimReleased()
 	if (ownerCitizen->BPAnim != nullptr)
 	{
 		ownerCitizen->BPAnim->bIsFighting = false;
-		ownerCitizen->GetCharacterMovement()->bOrientRotationToMovement = false;
+		if (bHasGun)
+		{
+			ownerCitizen->GetCharacterMovement()->bOrientRotationToMovement = true;
+		}
 	}
 }
 

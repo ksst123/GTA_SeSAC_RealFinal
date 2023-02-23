@@ -86,7 +86,6 @@ void UGTA_PlayerFightComponent::OnActionAimPressed()
 	if (ownerPlayer->BPAnim != nullptr)
 	{
 		ownerPlayer->BPAnim->bIsFighting = true;
-		ownerPlayer->GetCharacterMovement()->bOrientRotationToMovement = true;
 		if (bHasGun)
 		{
 			if (ownerPlayer->PlayerController != nullptr)
@@ -111,7 +110,6 @@ void UGTA_PlayerFightComponent::OnActionAimReleased()
 	if (ownerPlayer->BPAnim != nullptr)
 	{
 		ownerPlayer->BPAnim->bIsFighting = false;
-		ownerPlayer->GetCharacterMovement()->bOrientRotationToMovement = false;
 		if (bHasGun)
 		{
 			CrosshairUI->RemoveFromParent();
